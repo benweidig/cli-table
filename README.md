@@ -1,4 +1,4 @@
-# cli-table [![Build Status](https://travis-ci.org/benweidig/cli-table.svg?branch=master)]
+# cli-table ![Build Status](https://travis-ci.org/benweidig/cli-table.svg?branch=master)
 
 cli-table is a Go library for easy table-formatted output for CLIs.
 
@@ -23,6 +23,18 @@ This is     | the first | row? | 42   |      |
 A           | shorter   | row  |      |      |
 And an even | longer    | one  | with | more | columns than the first
 ```
+
+## Options
+
+You can configure the output by modifying the table struct:
+
+| Option                 | Type   | Default | Description                                        |
+| ---------------------- | ------ | ------- | -------------------------------------------------- |
+| ColSeparator           | string | " \| "   | Vertical separator between columns                 |
+| AdditionalRightPadding | int    | 0       | Adds an additional padding to the next column      |
+| OuterRightBorder       | bool   | false   | Enable the outer right border                      |
+| HeaderBorder           | bool   | false   | Enable the horizontal border beneath the first row |
+| HeaderSeparator        | string | '-'     | The byte used for the horizontal header border     |
 
 ## Get cli-table
 
