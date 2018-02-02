@@ -1,4 +1,4 @@
-# cli-table ![Build Status](https://travis-ci.org/benweidig/cli-table.svg?branch=master)
+# cli-table [![Build Status](https://travis-ci.org/benweidig/cli-table.svg?branch=master)](https://travis-ci.org/benweidig/cli-table)
 
 cli-table is a Go library for easy table-formatted output for CLIs.
 
