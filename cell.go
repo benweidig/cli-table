@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 
+	"regexp"
+
 	"github.com/mattn/go-runewidth"
 )
 
@@ -16,6 +18,8 @@ type cell struct {
 	width int
 }
 
+var ansiColorCodesRegexp = regexp.MustCompile("\\x1b\\[[0-9;]*m")
+
 func newCell(content interface{}) *cell {
 	if content == nil {
 		return &cell{
@@ -25,9 +29,13 @@ func newCell(content interface{}) *cell {
 	}
 
 	contentStr := fmt.Sprintf("%v", content)
+
+	// We need to remove ANSI color codes to get the actual width
+	sanitized := ansiColorCodesRegexp.ReplaceAllString(contentStr, "")
+
 	return &cell{
 		content: contentStr,
-		width:   runewidth.StringWidth(contentStr),
+		width:   runewidth.StringWidth(sanitized),
 	}
 }
 
