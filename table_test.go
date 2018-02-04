@@ -60,7 +60,7 @@ func TestTableOuterRightBorderTrue(t *testing.T) {
 	need := true
 
 	// ACT
-	table.OuterRightBorder = true
+	table.RightBorder = true
 	s := table.String()
 	got := strings.HasSuffix(s, table.ColSeparator+"\n")
 
@@ -77,7 +77,7 @@ func TestTableOuterRightBorderFalse(t *testing.T) {
 	need := false
 
 	// ACT
-	table.OuterRightBorder = false
+	table.RightBorder = false
 	s := table.String()
 	got := strings.HasSuffix(s, table.ColSeparator+"\n")
 

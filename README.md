@@ -28,13 +28,12 @@ And an even | longer    | one  | with | more | columns than the first
 
 You can configure the output by modifying the table struct:
 
-| Option                 | Type   | Default | Description                                        |
-| ---------------------- | ------ | ------- | -------------------------------------------------- |
-| ColSeparator           | string | " \| "   | Vertical separator between columns                 |
-| AdditionalRightPadding | int    | 0       | Adds an additional padding to the next column      |
-| OuterRightBorder       | bool   | false   | Enable the outer right border                      |
-| HeaderBorder           | bool   | false   | Enable the horizontal border beneath the first row |
-| HeaderSeparator        | string | '-'     | The byte used for the horizontal header border     |
+| Option          | Type   | Default | Description                                                                        |
+| --------------- | ------ | ------- | ---------------------------------------------------------------------------------- |
+| ColSeparator    | string | " \| "  | Vertical separator between columns                                                 |
+| Padding         | int    | 0       | Adds an additional padding to the next column                                      |
+| RightBorder     | bool   | false   | Enable the outer right border                                                      |
+| HeaderSeparator | byte   | 0       | The byte used for header separator, default is "no value" so no separator is added |
 
 ## Get cli-table
 

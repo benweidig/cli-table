@@ -13,27 +13,23 @@ type Table struct {
 	ColSeparator string
 
 	// Add an additional horizontal padding to the right of the content to cells
-	AdditionalRightPadding int
+	Padding int
 
 	// Print the border at the right outer side of the table
-	OuterRightBorder bool
+	RightBorder bool
 
-	// Add a border under the first row
-	HeaderBorder bool
-
-	// Header separator for border under the first row
+	// Header separator for border under the first row, if empty no header line will be added
 	HeaderSeparator byte
 }
 
 // Creates a new Table with sensible defaults
 func New() *Table {
 	return &Table{
-		ColSeparator:           " | ",
-		AdditionalRightPadding: 0,
-		OuterRightBorder:       false,
-		HeaderBorder:           false,
-		HeaderSeparator:        '-',
-		mtx:                    new(sync.RWMutex),
+		ColSeparator:    " | ",
+		Padding:         0,
+		RightBorder:     false,
+		HeaderSeparator: 0,
+		mtx:             new(sync.RWMutex),
 	}
 }
 
@@ -75,7 +71,7 @@ func (t *Table) String() string {
 	// Check if we want the outer right border
 	cols := len(colWidths)
 	borderedCols := cols
-	if t.OuterRightBorder == false {
+	if t.RightBorder == false {
 		borderedCols -= 1
 	}
 
@@ -93,16 +89,15 @@ func (t *Table) String() string {
 				cell := row.cells[colIdx]
 				buf.WriteString(cell.paddedContent(colWidth))
 			} else {
-				//				if t.OuterRightBorder == false && colIdx < cols {
-				if t.OuterRightBorder == true || colIdx < cols-1 {
+				if t.RightBorder == true || colIdx < cols-1 {
 					for i := 0; i < colWidth; i++ {
 						buf.WriteByte(' ')
 					}
 				}
 			}
 
-			if t.AdditionalRightPadding > 0 {
-				for i := 0; i < t.AdditionalRightPadding; i++ {
+			if t.Padding > 0 {
+				for i := 0; i < t.Padding; i++ {
 					buf.WriteByte(' ')
 				}
 			}
@@ -114,14 +109,14 @@ func (t *Table) String() string {
 		buf.WriteString("\n")
 
 		// Check if we need to print the header border
-		if rowIdx == 1 && t.HeaderBorder {
+		if rowIdx == 0 && t.HeaderSeparator > 0 {
 			for colIdx := 0; colIdx < cols; colIdx++ {
 				colWidth := colWidths[colIdx]
 				for i := 0; i < colWidth; i++ {
 					buf.WriteByte(t.HeaderSeparator)
 				}
-				if t.AdditionalRightPadding > 0 {
-					for i := 0; i < t.AdditionalRightPadding; i++ {
+				if t.Padding > 0 {
+					for i := 0; i < t.Padding; i++ {
 						buf.WriteByte(t.HeaderSeparator)
 					}
 				}
