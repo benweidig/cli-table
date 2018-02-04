@@ -7,7 +7,7 @@ import (
 	"github.com/mattn/go-runewidth"
 )
 
-// Cell represents a column in a row
+// Cell represents a single column in a row
 type cell struct {
 	// Content of the cell
 	content string

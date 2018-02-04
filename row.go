@@ -6,7 +6,7 @@ type row struct {
 	cells []*cell
 }
 
-// Return new row with contents as Cells
+// Return new Row struct with contents as Cells
 func newRow(contents ...interface{}) *row {
 	r := &row{
 		cells: make([]*cell, len(contents)),
