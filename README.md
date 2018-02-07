@@ -2,6 +2,10 @@
 
 cli-table is a Go library for easy table-formatted output for CLIs.
 
+## Get it
+
+`go get -u gopkg.in/benweidig/cli-table.v1`
+
 ## Example
 
 Please see [example/main.go](example/main.go) for a full example.
