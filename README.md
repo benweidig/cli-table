@@ -1,10 +1,10 @@
 # cli-table [![Build Status](https://travis-ci.org/benweidig/cli-table.svg?branch=master)](https://travis-ci.org/benweidig/cli-table)
 
-cli-table is a Go library for easy table-formatted output for CLIs.
+cli-table is a Go 1.10 library for easy table-formatted output for CLIs.
 
 ## Get it
 
-`go get -u gopkg.in/benweidig/cli-table.v1`
+`go get -u gopkg.in/benweidig/cli-table.v2`
 
 ## Example
 
@@ -38,12 +38,6 @@ You can configure the output by modifying the table struct:
 | Padding         | int    | 0       | Adds an additional padding to the next column                                      |
 | RightBorder     | bool   | false   | Enable the outer right border                                                      |
 | HeaderSeparator | byte   | 0       | The byte used for header separator, default is "no value" so no separator is added |
-
-## Get cli-table
-
-```sh
-$ go get -v github.com/benweidig/cli-table
-```
 
 ## Inspired by
 

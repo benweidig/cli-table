@@ -1,8 +1,8 @@
 package clitable
 
 import (
-	"bytes"
 	"fmt"
+	"strings"
 
 	"regexp"
 
@@ -40,10 +40,11 @@ func newCell(content interface{}) *cell {
 }
 
 func (c *cell) paddedContent(colWidth int) string {
-	var buf bytes.Buffer
-	buf.WriteString(c.content)
+	var builder strings.Builder
+	builder.Grow(colWidth)
+	builder.WriteString(c.content)
 	for i := 0; i < colWidth-c.width; i++ {
-		buf.WriteByte(' ')
+		builder.WriteByte(' ')
 	}
-	return buf.String()
+	return builder.String()
 }

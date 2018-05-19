@@ -1,7 +1,7 @@
 package clitable
 
 import (
-	"bytes"
+	"strings"
 	"sync"
 )
 
@@ -72,11 +72,11 @@ func (t *Table) String() string {
 	cols := len(colWidths)
 	borderedCols := cols
 	if t.RightBorder == false {
-		borderedCols -= 1
+		borderedCols--
 	}
 
 	// Holds the string representation of the table
-	var buf bytes.Buffer
+	var builder strings.Builder
 
 	// Build table data
 	for rowIdx, row := range t.rows {
@@ -87,48 +87,48 @@ func (t *Table) String() string {
 			// the empty cells with spaces
 			if colIdx < len(row.cells) {
 				cell := row.cells[colIdx]
-				buf.WriteString(cell.paddedContent(colWidth))
+				builder.WriteString(cell.paddedContent(colWidth))
 			} else {
 				if t.RightBorder == true || colIdx < cols-1 {
 					for i := 0; i < colWidth; i++ {
-						buf.WriteByte(' ')
+						builder.WriteByte(' ')
 					}
 				}
 			}
 
 			if t.Padding > 0 {
 				for i := 0; i < t.Padding; i++ {
-					buf.WriteByte(' ')
+					builder.WriteByte(' ')
 				}
 			}
 
 			if colIdx < borderedCols {
-				buf.WriteString(t.ColSeparator)
+				builder.WriteString(t.ColSeparator)
 			}
 		}
-		buf.WriteString("\n")
+		builder.WriteString("\n")
 
 		// Check if we need to print the header border
 		if rowIdx == 0 && t.HeaderSeparator > 0 {
 			for colIdx := 0; colIdx < cols; colIdx++ {
 				colWidth := colWidths[colIdx]
 				for i := 0; i < colWidth; i++ {
-					buf.WriteByte(t.HeaderSeparator)
+					builder.WriteByte(t.HeaderSeparator)
 				}
 				if t.Padding > 0 {
 					for i := 0; i < t.Padding; i++ {
-						buf.WriteByte(t.HeaderSeparator)
+						builder.WriteByte(t.HeaderSeparator)
 					}
 				}
 				if colIdx < borderedCols {
-					buf.WriteString(t.ColSeparator)
+					builder.WriteString(t.ColSeparator)
 				}
 
 			}
-			buf.WriteString("\n")
+			builder.WriteString("\n")
 		}
 
 	}
 
-	return buf.String()
+	return builder.String()
 }
